@@ -151,6 +151,7 @@ public class GLFont {
 		for (String line : lines) {
 			drawX = x;
 			for (char letter : line.toCharArray()) {
+                            try{
 				IntObject intObject = objects[(int) letter];
 				if (intObject == null) {
 					continue;
@@ -159,6 +160,9 @@ public class GLFont {
 				StaticVBO vbo = vbos[(int) letter];
 				vbo.render(drawX, drawY);
 				drawX += intObject.width;
+                            }catch(IndexOutOfBoundsException ex){
+                                System.out.println("Unknow letter " + letter + " for string : " + line);
+                            }
 			}
 			drawY += getSize() + 5;
 		}
